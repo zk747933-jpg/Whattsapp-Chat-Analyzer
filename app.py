@@ -89,7 +89,7 @@ else:
             if not busy_day.empty:
                 fig, ax = plt.subplots()
                 ax.bar(busy_day.index, busy_day.values)
-                plt.xticks(rotation='vertical',color='magneta)
+                plt.xticks(rotation='vertical',color='magneta')
                 st.pyplot(fig)
             else:
                 st.write("No data available.")
@@ -101,7 +101,7 @@ else:
             if not busy_month.empty:
                 fig, ax = plt.subplots()
                 ax.bar(busy_month.index, busy_month.values)
-                plt.xticks(rotation='vertical',color='orange)
+                plt.xticks(rotation='vertical',color='orange')
                 st.pyplot(fig)
             else:
                 st.write("No data available.")
@@ -189,4 +189,5 @@ else:
                 st.pyplot(fig)
             else:
                 st.write("No emoji data available.")
+
 
