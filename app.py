@@ -82,7 +82,7 @@ else:
 
         col1, col2 = st.columns(2)
 
-        with col1:
+with col1:
     st.header("Most Busy Day")
     busy_day = helper.week_activity_map(selected_user, filtered_df)
 
@@ -190,6 +190,7 @@ with col2:
                 st.pyplot(fig)
             else:
                 st.write("No emoji data available.")
+
 
 
 
