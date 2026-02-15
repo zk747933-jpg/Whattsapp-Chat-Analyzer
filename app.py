@@ -77,10 +77,10 @@ else:
         else:
             st.write("No daily data available.")
 
-        # ================= ACTIVITY MAP =================
-        st.title("🔥 Activity Map")
+                # ================= ACTIVITY MAP =================
+st.title("🔥 Activity Map")
 
-        col1, col2 = st.columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
     st.header("Most Busy Day")
@@ -190,6 +190,7 @@ with col2:
                 st.pyplot(fig)
             else:
                 st.write("No emoji data available.")
+
 
 
 
