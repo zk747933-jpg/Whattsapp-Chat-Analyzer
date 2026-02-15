@@ -18,6 +18,7 @@ else:
     bytes_data = uploaded_file.getvalue()
     data = bytes_data.decode("utf-8")
 
+    # Preprocess the data
     df = preprocessor.preprocessor(data)
 
     user_list = df['user'].unique().tolist()
@@ -48,7 +49,6 @@ else:
 
         # ================= MONTHLY TIMELINE =================
         st.title("📅 Monthly Timeline")
-
         timeline = helper.monthly_timeline(selected_user, filtered_df)
 
         if not timeline.empty:
@@ -61,7 +61,6 @@ else:
 
         # ================= DAILY TIMELINE =================
         st.title("📆 Daily Timeline")
-
         daily_timeline = helper.daily_timeline(selected_user, filtered_df)
 
         if not daily_timeline.empty:
@@ -74,13 +73,11 @@ else:
 
         # ================= ACTIVITY MAP =================
         st.title("🔥 Activity Map")
-
         col1, col2 = st.columns(2)
 
         with col1:
             st.header("Most Busy Day")
             busy_day = helper.week_activity_map(selected_user, filtered_df)
-
             if not busy_day.empty:
                 fig, ax = plt.subplots()
                 ax.bar(busy_day.index, busy_day.values, color='magenta')
@@ -92,7 +89,6 @@ else:
         with col2:
             st.header("Most Busy Month")
             busy_month = helper.month_activity_map(selected_user, filtered_df)
-
             if not busy_month.empty:
                 fig, ax = plt.subplots()
                 ax.bar(busy_month.index, busy_month.values, color='orange')
@@ -103,7 +99,6 @@ else:
 
         # ================= HEATMAP =================
         st.title("🗓 Weekly Activity Heatmap")
-
         user_heatmap = helper.activity_heatmap(selected_user, filtered_df)
 
         if not user_heatmap.empty:
@@ -115,13 +110,10 @@ else:
 
         # ================= MOST BUSY USERS =================
         if selected_user == "Overall":
-
             st.title("👥 Most Busy Users")
-
             x, new_df = helper.most_busy_users(df)
 
             col1, col2 = st.columns(2)
-
             with col1:
                 if not x.empty:
                     fig, ax = plt.subplots()
@@ -136,7 +128,6 @@ else:
 
         # ================= WORDCLOUD =================
         st.title("☁ WordCloud")
-
         df_wc = helper.create_wordcloud(selected_user, filtered_df)
 
         if df_wc is not None:
@@ -149,7 +140,6 @@ else:
 
         # ================= MOST COMMON WORDS =================
         st.title("📝 Most Common Words")
-
         most_common_df = helper.most_common_words(selected_user, filtered_df)
 
         if not most_common_df.empty:
@@ -162,13 +152,15 @@ else:
 
         # ================= EMOJI ANALYSIS =================
         st.title("😀 Emoji Analysis")
-
         emoji_df = helper.emoji_helper(selected_user, filtered_df)
 
         col1, col2 = st.columns(2)
 
         with col1:
-            st.dataframe(emoji_df)
+            if not emoji_df.empty:
+                st.dataframe(emoji_df)
+            else:
+                st.write("No emojis found.")
 
         with col2:
             if not emoji_df.empty:
@@ -176,4 +168,11 @@ else:
                 top_emojis = emoji_df.head(10)
 
                 ax.pie(
-                    top_emojis['count]()_
+                    top_emojis['count'],
+                    labels=top_emojis['emoji'],
+                    autopct="%0.2f%%",
+                    startangle=90
+                )
+                st.pyplot(fig)
+            else:
+                st.write("No emojis to plot.")
