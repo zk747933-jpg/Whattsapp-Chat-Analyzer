@@ -37,7 +37,7 @@ def most_busy_users(df):
         (df['user'].value_counts() / df.shape[0] * 100)
         .head()
         .reset_index()
-        .rename(columns={'index': 'name', 'user': 'name/no.'})
+        .rename(columns={'index': 'name/no.', 'user': 'percent'})
     )
 
     # add count explicitly
@@ -196,5 +196,6 @@ def activity_heatmap(selected_user, df):
     ).fillna(0)
 
     return user_heatmap
+
 
 
