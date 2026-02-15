@@ -66,7 +66,7 @@ else:
 
         if not daily_timeline.empty:
             fig, ax = plt.subplots()
-            ax.plot(daily_timeline['only_date'], daily_timeline['num_messages'])
+            ax.plot(daily_timeline['only_date'], daily_timeline['num_messages'], color='black')
             plt.xticks(rotation='vertical')
             st.pyplot(fig)
         else:
@@ -83,7 +83,7 @@ else:
 
             if not busy_day.empty:
                 fig, ax = plt.subplots()
-                ax.bar(busy_day.index, busy_day.values)
+                ax.bar(busy_day.index, busy_day.values, color='magenta')
                 plt.xticks(rotation='vertical')
                 st.pyplot(fig)
             else:
@@ -95,7 +95,7 @@ else:
 
             if not busy_month.empty:
                 fig, ax = plt.subplots()
-                ax.bar(busy_month.index, busy_month.values)
+                ax.bar(busy_month.index, busy_month.values, color='orange')
                 plt.xticks(rotation='vertical')
                 st.pyplot(fig)
             else:
@@ -176,11 +176,4 @@ else:
                 top_emojis = emoji_df.head(10)
 
                 ax.pie(
-                    top_emojis['count'],
-                    labels=top_emojis['emoji'],
-                    autopct="%0.1f%%"
-                )
-
-                st.pyplot(fig)
-            else:
-                st.write("No emoji data available.")
+                    top_emojis['count]()_
