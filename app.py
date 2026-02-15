@@ -10,20 +10,16 @@ st.sidebar.title("📊 WhatsApp Chat Analyzer")
 
 uploaded_file = st.sidebar.file_uploader("Choose a WhatsApp Chat File (.txt)")
 
-# ================= IF NO FILE UPLOADED =================
 if uploaded_file is None:
     st.title("📊 WhatsApp Chat Analyzer")
     st.info("Please upload your exported WhatsApp chat (.txt) file from the sidebar to start analysis.")
 
-# ================= IF FILE UPLOADED =================
 else:
-
     bytes_data = uploaded_file.getvalue()
     data = bytes_data.decode("utf-8")
 
     df = preprocessor.preprocessor(data)
 
-    # User list
     user_list = df['user'].unique().tolist()
     user_list.sort()
     user_list.insert(0, "Overall")
@@ -45,7 +41,6 @@ else:
         )
 
         col1, col2, col3, col4 = st.columns(4)
-
         col1.metric("Total Messages", num_messages)
         col2.metric("Total Words", words)
         col3.metric("Media Shared", num_media_messages)
@@ -71,41 +66,40 @@ else:
 
         if not daily_timeline.empty:
             fig, ax = plt.subplots()
-            ax.plot(daily_timeline['only_date'], daily_timeline['num_messages'],color='black')
+            ax.plot(daily_timeline['only_date'], daily_timeline['num_messages'])
             plt.xticks(rotation='vertical')
             st.pyplot(fig)
         else:
             st.write("No daily data available.")
 
-                # ================= ACTIVITY MAP =================
-st.title("🔥 Activity Map")
+        # ================= ACTIVITY MAP =================
+        st.title("🔥 Activity Map")
 
-col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-with col1:
-    st.header("Most Busy Day")
-    busy_day = helper.week_activity_map(selected_user, filtered_df)
+        with col1:
+            st.header("Most Busy Day")
+            busy_day = helper.week_activity_map(selected_user, filtered_df)
 
-    if not busy_day.empty:
-        fig, ax = plt.subplots()
-        ax.bar(busy_day.index, busy_day.values)
-        plt.xticks(rotation='vertical')
-        st.pyplot(fig)
-    else:
-        st.write("No data available.")
+            if not busy_day.empty:
+                fig, ax = plt.subplots()
+                ax.bar(busy_day.index, busy_day.values)
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+            else:
+                st.write("No data available.")
 
-with col2:
-    st.header("Most Busy Month")
-    busy_month = helper.month_activity_map(selected_user, filtered_df)
+        with col2:
+            st.header("Most Busy Month")
+            busy_month = helper.month_activity_map(selected_user, filtered_df)
 
-    if not busy_month.empty:
-        fig, ax = plt.subplots()
-        ax.bar(busy_month.index, busy_month.values)
-        plt.xticks(rotation='vertical')
-        st.pyplot(fig)
-    else:
-        st.write("No data available.")
-
+            if not busy_month.empty:
+                fig, ax = plt.subplots()
+                ax.bar(busy_month.index, busy_month.values)
+                plt.xticks(rotation='vertical')
+                st.pyplot(fig)
+            else:
+                st.write("No data available.")
 
         # ================= HEATMAP =================
         st.title("🗓 Weekly Activity Heatmap")
@@ -190,8 +184,3 @@ with col2:
                 st.pyplot(fig)
             else:
                 st.write("No emoji data available.")
-
-
-
-
-
