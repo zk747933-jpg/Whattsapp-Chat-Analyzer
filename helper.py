@@ -29,22 +29,14 @@ def fetch_stats(selected_user, df):
 
 # ================= MOST BUSY USERS =================
 def most_busy_users(df):
-    # top 5 users by message count
-    top_users = df['user'].value_counts().head()
 
-    # percentage of messages
-    df_percent = (
-        (df['user'].value_counts() / df.shape[0] * 100)
-        .head()
-        .reset_index()
-        .rename(columns={'index': 'name', 'user': 'percent'})
-    )
+    x = df['user'].value_counts().head()
 
-    # add count explicitly
-    df_percent['count'] = top_users.values
+    df_percent = round(
+        (df['user'].value_counts() / df.shape[0]) * 100, 2
+    ).reset_index().rename(columns={'index': 'name', 'user': 'percent'})
 
-    return top_users, df_percent
-
+    return x, df_percent
 
 
 # ================= WORDCLOUD =================
@@ -196,7 +188,3 @@ def activity_heatmap(selected_user, df):
     ).fillna(0)
 
     return user_heatmap
-
-
-
-
