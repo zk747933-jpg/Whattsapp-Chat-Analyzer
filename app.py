@@ -83,28 +83,29 @@ else:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.header("Most Busy Day")
-            busy_day = helper.week_activity_map(selected_user, filtered_df)
+    st.header("Most Busy Day")
+    busy_day = helper.week_activity_map(selected_user, filtered_df)
 
-            if not busy_day.empty:
-                fig, ax = plt.subplots()
-                ax.bar(busy_day.index, busy_day.values)
-                plt.xticks(rotation='vertical',color='magneta')
-                st.pyplot(fig)
-            else:
-                st.write("No data available.")
+    if not busy_day.empty:
+        fig, ax = plt.subplots()
+        ax.bar(busy_day.index, busy_day.values)
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+    else:
+        st.write("No data available.")
 
-        with col2:
-            st.header("Most Busy Month")
-            busy_month = helper.month_activity_map(selected_user, filtered_df)
+with col2:
+    st.header("Most Busy Month")
+    busy_month = helper.month_activity_map(selected_user, filtered_df)
 
-            if not busy_month.empty:
-                fig, ax = plt.subplots()
-                ax.bar(busy_month.index, busy_month.values)
-                plt.xticks(rotation='vertical',color='orange')
-                st.pyplot(fig)
-            else:
-                st.write("No data available.")
+    if not busy_month.empty:
+        fig, ax = plt.subplots()
+        ax.bar(busy_month.index, busy_month.values)
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+    else:
+        st.write("No data available.")
+
 
         # ================= HEATMAP =================
         st.title("🗓 Weekly Activity Heatmap")
@@ -189,5 +190,6 @@ else:
                 st.pyplot(fig)
             else:
                 st.write("No emoji data available.")
+
 
 
