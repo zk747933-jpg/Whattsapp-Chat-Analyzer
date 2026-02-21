@@ -24,7 +24,7 @@ The **WhatsApp Chat Analyzer** is a Python-based tool that analyzes your exporte
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/whatsapp-chat-analyzer.git
+git clone https://github.com/zk747933-jpg/Whattsapp-Chat-Analyzer
 cd whatsapp-chat-analyzer
 ```
 
